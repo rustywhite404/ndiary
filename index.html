@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>今日、何したの？</title>
+<link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@400;600&family=Zen+Maru+Gothic:wght@400;500;700&family=Noto+Sans+KR:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+  <header class="header">
+    <div class="header-jp">日記添削サービス</div>
+    <h1>今日、何したの？</h1>
+    <div class="header-line"></div>
+    <p class="header-desc">일본어로 쓴 일기 사진을 올리면<br>AI가 자연스러운 문법으로 교정해드립니다.</p>
+  </header>
+
+  <!-- Section 0 - API Key -->
+  <div class="section">
+    <div class="section-label">
+      <span class="num">0</span>
+      <span class="title">API Key</span>
+      <span class="sub">OpenAI</span>
+    </div>
+    <div class="key-field">
+      <span class="key-prefix">KEY</span>
+      <input id="apiKey" type="password" class="key-input" placeholder="OpenAI API key를 입력해주세요. 내 컴퓨터에만 저장됩니다.">
+    </div>
+  </div>
+
+  <!-- Section 1 - Diary Photo -->
+  <div class="section">
+    <div class="section-label">
+      <span class="num">1</span>
+      <span class="title">Diary Photo</span>
+      <span class="sub">일기 사진</span>
+    </div>
+    <input id="fileInput" type="file" accept="image/*" style="display:none">
+    <div id="uploadEmpty" class="upload-zone">
+      <div class="ux-icon">✎</div>
+      <div class="ux-text">사진을 업로드하세요</div>
+      <div class="ux-hint">JPG · PNG · GIF</div>
+    </div>
+    <div id="uploadFilled" class="upload-zone filled" style="display:none">
+      <div class="img-wrap">
+        <img id="previewImg" src="" alt="diary">
+        <button id="delImg" class="img-del">✕</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2 - Korean Text -->
+  <div class="section">
+    <div class="section-label">
+      <span class="num">2</span>
+      <span class="title">Korean Text</span>
+      <span class="sub">원래 쓰려던 내용</span>
+    </div>
+    <div class="text-field-wrap">
+      <textarea id="koreanText" class="text-field" placeholder="일기에서 전달하고 싶었던 내용을 한국어로 적어주시면 교정에 도움이 됩니다."></textarea>
+      <div class="text-field-lines"></div>
+    </div>
+    <div class="text-meta"><span id="charCount">0</span> chars</div>
+  </div>
+
+  <!-- Submit -->
+  <button id="submitBtn" class="action-btn">
+    <span id="btnText">添削する</span>
+    <span class="arrow">→</span>
+  </button>
+
+  <!-- Loading -->
+  <div id="loadingBox" class="loading-box" style="display:none">
+    <div class="loading-bar"><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="loading-label">ANALYZING</div>
+  </div>
+
+  <footer class="footer">今日、何したの？ — rustywhite404@gmail.com</footer>
+</div>
+
+<!-- Modal -->
+<div id="modalOverlay" class="modal-overlay" style="display:none">
+  <div class="modal">
+    <div id="modalIcon" class="modal-icon">!</div>
+    <div id="modalTitle" class="modal-title"></div>
+    <div id="modalBody" class="modal-body"></div>
+    <button id="modalBtn" class="modal-btn">わかった</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

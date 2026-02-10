@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(del \"c:\\\\Users\\\\user\\\\Documents\\\\GitHub\\\\ndiary\\\\app.jsx\")"
+    ]
+  }
+}
