@@ -35,11 +35,8 @@ apiKeyInput.addEventListener('change', () => {
 });
 
 // --- File upload ---
-uploadEmpty.addEventListener('click', () => fileInput.click());
-
-fileInput.addEventListener('change', e => {
-  const f = e.target.files[0];
-  if (!f) return;
+function loadImage(f) {
+  if (!f || !f.type.startsWith('image/')) return;
   imageFile = f;
   const reader = new FileReader();
   reader.onload = ev => {
@@ -48,6 +45,18 @@ fileInput.addEventListener('change', e => {
     uploadFilled.style.display = '';
   };
   reader.readAsDataURL(f);
+}
+
+uploadEmpty.addEventListener('click', () => fileInput.click());
+
+fileInput.addEventListener('change', e => loadImage(e.target.files[0]));
+
+document.addEventListener('paste', e => {
+  const item = [...(e.clipboardData?.items || [])].find(i => i.type.startsWith('image/'));
+  if (item) {
+    e.preventDefault();
+    loadImage(item.getAsFile());
+  }
 });
 
 delImgBtn.addEventListener('click', e => {
